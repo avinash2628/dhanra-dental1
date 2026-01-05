@@ -1,8 +1,10 @@
 import "./globals.css";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 
 export const metadata = {
   title: "Dhanra Dental",
-  description: "Premium Dental Care",
+  description: "Dental Aesthetic & Implant Care",
 };
 
 export default function RootLayout({
@@ -12,7 +14,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <Header />
+        {children}
+        <Footer />
+      </body>
     </html>
   );
 }

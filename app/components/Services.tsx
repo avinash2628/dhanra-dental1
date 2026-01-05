@@ -1,95 +1,58 @@
+"use client";
+
 import Image from "next/image";
+import { motion } from "framer-motion";
+
+const services = [
+  { title: "Braces & Aligners", image: "/images/services/braces.avif" },
+  { title: "Teeth Cleaning", image: "/images/services/cleaning.avif" },
+  { title: "Cosmetic Dentistry", image: "/images/services/cosmetic.avif" },
+  { title: "Dental Implants", image: "/images/services/implant.avif" },
+  { title: "Kids Dentistry", image: "/images/services/kids.avif" },
+  { title: "Root Canal Treatment", image: "/images/services/rootcanaltreatment.avif" },
+];
 
 export default function Services() {
   return (
-    <section id="services" className="bg-white py-24">
+    <section className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-6">
+        <motion.h2
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-4xl font-bold text-center mb-16"
+        >
+          Our Dental Services
+        </motion.h2>
 
-        {/* Heading */}
-        <div className="text-center mb-20">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Our Dental Services
-          </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto text-lg">
-            From routine checkups to complete smile makeovers — we offer all
-            treatments under one roof.
-          </p>
-        </div>
-
-        {/* Services Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-16 text-center">
-
-          {/* 1 */}
-          <ServiceCard
-            image="/images/services/cleaning.avif"
-            title="Teeth Cleaning & Whitening"
-            desc="Brighten your smile with painless cleaning and professional whitening."
-          />
-
-          {/* 2 */}
-          <ServiceCard
-            image="/images/services/rootcanaltreatment.avif"
-            title="Root Canal Treatment"
-            desc="Quick, painless, and modern root canal therapy to save your natural tooth."
-          />
-
-          {/* 3 */}
-          <ServiceCard
-            image="/images/services/braces.avif"
-            title="Braces & Aligners"
-            desc="Metal braces, ceramic, or invisible aligners tailored for perfect alignment."
-          />
-
-          {/* 4 */}
-          <ServiceCard
-            image="/images/services/cosmetic.avif"
-            title="Cosmetic Dentistry"
-            desc="Smile designing, veneers, and aesthetic corrections for confidence."
-          />
-
-          {/* 5 */}
-          <ServiceCard
-            image="/images/services/implant.avif"
-            title="Dental Implants"
-            desc="Permanent tooth replacement with advanced implant technology."
-          />
-
-          {/* 6 */}
-          <ServiceCard
-            image="/images/services/kids.avif"
-            title="Kids Dentistry"
-            desc="Gentle, friendly dental care designed specially for children."
-          />
-
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
+          {services.map((service, index) => (
+            <motion.div
+              key={service.title}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition overflow-hidden"
+            >
+              <Image
+                src={service.image}
+                alt={service.title}
+                width={400}
+                height={300}
+                className="w-full h-56 object-cover"
+              />
+              <div className="p-6 text-center">
+                <h3 className="text-xl font-semibold">{service.title}</h3>
+                <button className="mt-4 bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700 transition">
+                  Book Now
+                </button>
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>
-  );
-}
-
-/* Card Component */
-function ServiceCard({
-  image,
-  title,
-  desc,
-}: {
-  image: string;
-  title: string;
-  desc: string;
-}) {
-  return (
-    <div className="group">
-      <div className="w-40 h-40 mx-auto rounded-full overflow-hidden shadow-lg mb-6 transition-transform duration-300 group-hover:scale-105">
-        <Image
-          src={image}
-          alt={title}
-          width={160}
-          height={160}
-          className="object-cover w-full h-full"
-        />
-      </div>
-      <h3 className="text-xl font-semibold mb-3">{title}</h3>
-      <p className="text-gray-600">{desc}</p>
-    </div>
   );
 }
